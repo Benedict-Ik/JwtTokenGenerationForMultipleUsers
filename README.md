@@ -1,12 +1,9 @@
 # Jwt Token Generation For Multiple Users
 
-## Defining Simple `User` Model
-Created a new cllass called `User` within a newly created folder called `Models`.
+## Adding Connection String
+At this point, it is expected that you should have created a new database and add the connection string below:
 ```C#
-public class User
-{
-    public int Id { get; set; }
-    public string Username { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty; // Store hashed passwords in production
+"ConnectionStrings": {
+	"DefaultConnection": "Server=BENEDICT-IK\\SQLEXPRESS;Database=JwtTokenGenerationForMultipleUsers;Trusted_Connection=True;TrustServerCertificate=true"
 }
 ```
