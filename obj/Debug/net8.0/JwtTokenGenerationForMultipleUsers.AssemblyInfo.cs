@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d39c42bf972fe2be413ed4a627c6b40f0f6142b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb0b108bb6ce51a513948bab363ee034160b26ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
