@@ -142,3 +142,4 @@ C:\Users\Benedict-Ik\source\repos\JwtTokenGenerationForMultipleUsers\obj\Debug\n
 C:\Users\Benedict-Ik\source\repos\JwtTokenGenerationForMultipleUsers\obj\Debug\net8.0\JwtTokenGenerationForMultipleUsers.genruntimeconfig.cache
 C:\Users\Benedict-Ik\source\repos\JwtTokenGenerationForMultipleUsers\obj\Debug\net8.0\ref\JwtTokenGenerationForMultipleUsers.dll
 C:\Users\Benedict-Ik\source\repos\JwtTokenGenerationForMultipleUsers\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Benedict-Ik\source\repos\JwtTokenGenerationForMultipleUsers\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

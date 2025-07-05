@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/register": {
+    "/api/Auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -36,7 +36,7 @@
         }
       }
     },
-    "/login": {
+    "/api/Auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -160,6 +160,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Enter 'Bearer' [space] and then your valid access token.\n\nExample: Bearer eyJhbGciOiJIUzI1NiIs...'",
+        "name": "Authorization",
+        "in": "header"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }
