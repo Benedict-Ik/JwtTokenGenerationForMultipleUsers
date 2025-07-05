@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "JwtTokenGenerationForMultipleUsers.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "JwtTokenGenerationForMultipleUsers.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "JwtTokenGenerationForMultipleUsers.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

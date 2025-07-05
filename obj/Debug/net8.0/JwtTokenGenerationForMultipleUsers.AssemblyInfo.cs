@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("67f4b1c9-ca4f-4160-8965-dad0a684b0ce")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8cf4bd518626a90cdaf15f1f991fea08bd4634f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab0039c13f2226d746a57719d7c9059ba6a4c376")]
 [assembly: System.Reflection.AssemblyProductAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JwtTokenGenerationForMultipleUsers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

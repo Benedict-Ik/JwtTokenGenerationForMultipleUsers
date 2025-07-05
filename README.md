@@ -1,27 +1,35 @@
 # Jwt Token Generation For Multiple Users
 
-## Installing Packages
-The below packages have to be installed to use EF Core
-- **Microsoft.EntityFrameworkCore**: Provides the core functionality for EF Core.
-- **Microsoft.EntityFrameworkCore.SqlServer**: Provides the SQL Server database provider for EF Core.
-- **Microsoft.EntityFrameworkCore.Tools**: Provides tools for EF Core, such as migrations and scaffolding.
->Ensure the versions installed are of the same version with the .NET framework being used. For instance, if you have .NET 8 installed, ensure you install packages within 8.x.x.
-
-## Creating DbContext class
-Created a new class called `AppDbContext` embedded within a newly created `Data` folder.
+## Modified `User` Model Class
+Added a `PasswordHash` property to store the hashed password.
 ```C#
-public class AppDbContext : DbContext
+public class User
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options) { }
-
-    public DbSet<User> Users { get; set; }
+    public int Id { get; set; }
+    public string Username { get; set; } 
+    public string PasswordHash { get; set; } 
 }
 ```
->Note that if there are other entities involved with interwoven relationships, you will have to define the relationships by calling `OnModelCreating()` method.
 
-## Registering newly created DbContext in Program.cs
+## Ran Migrations
+
+## Installing Bcrypt.Net Package
+To handle password hashing, the `Bcrypt.Net-Next` package was installed via the NuGet Package Manager Console using the following command:
+
+## Creating a `PasswordHelper` Class
+Created a `PasswordHelper` class within a newly created `Utility` folder to handle password hashing and verification.
 ```C#
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+public class PasswordHelper
+{
+    public static string HashPassword(string password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password);
+    }
+    public static bool VerifyPassword(string password, string hashedPassword)
+    {
+        return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+    }
+}
 ```
+
+## Creating a `UserService` Class
