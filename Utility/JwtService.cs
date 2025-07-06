@@ -14,7 +14,6 @@ namespace JwtTokenGenerationForMultipleUsers.Utility
         public JwtService(IOptions<JwtSettings> options)
         {
             _options = options.Value ;
-            //_options = options.Value ?? throw new ArgumentNullException(nameof(options));
 
             Console.WriteLine($"DEBUG: JWT Key from config: {_options.Key}");
 

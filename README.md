@@ -61,3 +61,118 @@ Deletes a user based on their ID.
 
 - `AppDbContext`: Entity Framework Core database context.
 - `PasswordHelper`: Utility class responsible for hashing and verifying passwords.
+
+---
+
+## Managing Secrets with Secret Manager
+To securely handle sensitive data like JWT keys, database credentials, or API tokens during development, this project uses the .NET Secret Manager in combination with IOptions\<T> binding for clean and type-safe configuration.
+
+### Why Use Secret Manager?
+- Keeps secrets out of appsettings.json and source control
+- Provides environment-specific storage for local development
+- Integrates seamlessly with the .NET configuration system
+
+### Setup Steps
+Instead of accessing secrets like config["Jwt:Key"], this project uses a structured options class (JwtSettings) for better maintainability and safety:
+
+**Step 1: Create a strongly typed configuration class**
+```C#
+public class JwtSettings
+{
+    public string Key { get; set; }
+    public string Issuer { get; set; }
+    public string Audience { get; set; }
+    public int ExpiryInMinutes { get; set; }
+}
+```
+
+**Step 2: Bind configuration using IOptions\<T> in Program.cs**
+```C#
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+```
+
+**Step 3: Store the secrets securely using the Secret Manager CLI**
+```Bash
+dotnet user-secrets set "Jwt:Key" "9s64e5ba0w325bdb106e2b12r848f7d87c12f00c6c6ed01870579f3613437ad8"
+dotnet user-secrets set "Jwt:Issuer" "https://localhost:7234"
+dotnet user-secrets set "Jwt:Audience" "https://localhost:7234"
+```
+>The above secrets are subjective to the user and their system.
+
+**Step 4: Bind configuration settings with the model class**
+```C#
+public class JwtSettings
+{
+    public string Key { get; set; }
+    public string Issuer { get; set; }
+    public string Audience { get; set; }
+    public int ExpiryInMinutes { get; set; }
+}
+```
+> Properties defined here should match the properties defined in appsettings.
+
+**Case sample:**
+```Json
+"JwtSettings": {
+    "Key": "Key",
+    "Issuer": "Issuer",
+    "Audience": "Audience",
+    "ExpirationInMinutes": 15
+}
+```
+>Placeholders are used above since these values will be overidden by those defined in the Secret Manager.
+
+**Step 5: Use the bound options in your service via dependency injection**
+```C#
+public class JwtService
+{
+    private readonly JwtSettings _options;
+
+    public JwtService(IOptions<JwtSettings> options)
+    {
+        _options = options.Value ;
+
+        Console.WriteLine($"DEBUG: JWT Key from config: {_options.Key}");
+
+        if (string.IsNullOrWhiteSpace(_options.Key) || _options.Key.Length < 32)
+        {
+            throw new ArgumentException("JWT key must be at least 256 bits (32 characters).", nameof(_options.Key));
+        }
+
+        if (string.IsNullOrWhiteSpace(_options.Issuer))
+        {
+            throw new ArgumentException("JWT issuer must be provided.", nameof(_options.Issuer));
+        }
+    }
+
+    public string GenerateToken(User user)
+    {
+        try
+        {
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Username)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _options.Issuer,
+                audience: _options.Issuer,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(15),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error generating token: {ex}");
+            throw new InvalidOperationException("An error occurred while generating the JWT.", ex);
+        }
+    }
+}
+```
