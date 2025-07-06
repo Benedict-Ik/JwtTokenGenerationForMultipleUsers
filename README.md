@@ -6,8 +6,8 @@ This repo aims to demonstrate how to implement Jwt Token Authentication for mult
 
 ## Steps Overview
 In this project we implemented the below steps:
-- Created user model
-- Added connecton strings
-- Set up DbContext
-- Created and Implemented User and JWT Services
-- Created Auth Controller
+1. Created user model
+1. Added connecton strings
+1. Set up DbContext
+1. Created and Implemented User and JWT Services
+1. Created Auth Controller
