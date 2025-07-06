@@ -1,35 +1,24 @@
 # Jwt Token Generation For Multiple Users
 
-## Modified `User` Model Class
-Added a `PasswordHash` property to store the hashed password.
-```C#
-public class User
-{
-    public int Id { get; set; }
-    public string Username { get; set; } 
-    public string PasswordHash { get; set; } 
-}
-```
+## Overview
+Exposes authentication-related API endpoints, specifically for registering users and logging them in via JWTs.
 
-## Ran Migrations
+## Endpoints
+- **POST /api/users/register:** Registers a new user with a provided username and password.
+- **POST /api/users/login:** Authenticates an existing user and returns a signed JWT on success.
 
-## Installing Bcrypt.Net Package
-To handle password hashing, the `Bcrypt.Net-Next` package was installed via the NuGet Package Manager Console using the following command:
+## Dependencies
+1. **Uses IUserService:**
 
-## Creating a `PasswordHelper` Class
-Created a `PasswordHelper` class within a newly created `Utility` folder to handle password hashing and verification.
-```C#
-public class PasswordHelper
-{
-    public static string HashPassword(string password)
-    {
-        return BCrypt.Net.BCrypt.HashPassword(password);
-    }
-    public static bool VerifyPassword(string password, string hashedPassword)
-    {
-        return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-    }
-}
-```
+- Handles core user operations like creating users and validating credentials.
+- Encapsulates database access and password hashing internally.
 
-## Creating a `UserService` Class
+
+2. **Uses JwtService:**
+- Generates JWT tokens that contain user identity claims.
+- Provides a secure mechanism for authenticated users to access protected APIs.
+
+
+3. **Request Models:**
+- RegisterRequest: Carries username and password for account creation.
+- LoginRequest: Carries username and password for authentication.
