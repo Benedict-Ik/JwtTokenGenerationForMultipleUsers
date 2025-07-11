@@ -9,16 +9,15 @@ Exposes authentication-related API endpoints, specifically for registering users
 
 ## Dependencies
 1. **Uses IUserService:**
-
 - Handles core user operations like creating users and validating credentials.
 - Encapsulates database access and password hashing internally.
 
-
+  
 2. **Uses JwtService:**
 - Generates JWT tokens that contain user identity claims.
 - Provides a secure mechanism for authenticated users to access protected APIs.
 
-
+  
 3. **Request Models:**
 - RegisterRequest: Carries username and password for account creation.
 - LoginRequest: Carries username and password for authentication.
