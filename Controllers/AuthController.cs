@@ -21,7 +21,7 @@ namespace JwtTokenGenerationForMultipleUsers.Controllers
 
         // POST: api/users/register
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] Models.DTOs.RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] Models.DTOs.AuthRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
             {
@@ -41,7 +41,7 @@ namespace JwtTokenGenerationForMultipleUsers.Controllers
 
         // POST: api/users/login
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] Models.DTOs.LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] Models.DTOs.AuthRequest request)
         {
             var user = await _userService.GetUserAsync(request.Username, request.Password);
             if (user == null)

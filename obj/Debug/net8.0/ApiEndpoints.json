@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.LoginRequest",
+        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.AuthRequest",
         "IsRequired": true
       }
     ],
@@ -25,7 +25,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.RegisterRequest",
+        "Type": "JwtTokenGenerationForMultipleUsers.Models.DTOs.AuthRequest",
         "IsRequired": true
       }
     ],

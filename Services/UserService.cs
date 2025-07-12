@@ -47,6 +47,15 @@ namespace JwtTokenGenerationForMultipleUsers.Services
 
         public async Task<User?> CreateUserAsync(User user, string rawPassword)
         {
+            if (user == null || string.IsNullOrWhiteSpace(rawPassword))
+                throw new ArgumentException("User and raw password must be provided.");
+
+            // Check if user already exists
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == user.Username);
+            if (existingUser != null)
+                throw new InvalidOperationException("A user with this email already exists.");
+
             try
             {
                 user.PasswordHash = PasswordHelper.HashPassword(rawPassword);
